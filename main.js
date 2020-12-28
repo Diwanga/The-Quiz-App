@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 var btns = document.getElementsByClassName("ans");
 const elA = document.getElementById("a");
 const elB = document.getElementById("b");
@@ -14,13 +6,13 @@ const elD = document.getElementById("d");
 const ques = document.getElementById("ques");
 const questarea = document.getElementById("questarea");
 const submit = document.getElementById("submit");
-questarea.style.display='none';
-submit.style.display='none';
+questarea.style.display = "none";
+submit.style.display = "none";
 
 const q = document.getElementsByClassName("q");
 let answers = [];
 let current = 0;
-let questions=[];
+let questions = [];
 let mark = 0;
 
 // const questions = [
@@ -50,43 +42,33 @@ let mark = 0;
 //   },
 // ];
 
-function readTextFile(file)
-{
-var rawFile = new XMLHttpRequest();
-rawFile.open("GET", file, false);
-rawFile.onreadystatechange = function ()
-{
-   if(rawFile.readyState === 4)
-   {
-       if(rawFile.status === 200 || rawFile.status == 0)
-       {
-           var allText = rawFile.responseText;
-          const Readedquestions = allText.toString().split("/");
-           const itter = Readedquestions.length;
-           var itter2 = 0;
-           for(let i = 0;i<itter/6;i++){
-             let quesy={};
-    
-             quesy.question = Readedquestions[itter2++];
-             quesy.a= Readedquestions[itter2++];
-             quesy.b= Readedquestions[itter2++];
-             quesy.c= Readedquestions[itter2++];
-             quesy.d= Readedquestions[itter2++];
-             quesy.ans= Readedquestions[itter2++];
-             questions.push(quesy);
+function readTextFile(file) {
+  var rawFile = new XMLHttpRequest();
+  rawFile.open("GET", file, false);
+  rawFile.onreadystatechange = function () {
+    if (rawFile.readyState === 4) {
+      if (rawFile.status === 200 || rawFile.status == 0) {
+        var allText = rawFile.responseText;
+        const Readedquestions = allText.toString().split("/");
+        const itter = Readedquestions.length;
+        var itter2 = 0;
+        for (let i = 0; i < itter / 6; i++) {
+          let quesy = {};
 
-
-          
-           }
-           console.log(questions);
-
-       }
-   }
+          quesy.question = Readedquestions[itter2++];
+          quesy.a = Readedquestions[itter2++];
+          quesy.b = Readedquestions[itter2++];
+          quesy.c = Readedquestions[itter2++];
+          quesy.d = Readedquestions[itter2++];
+          quesy.ans = Readedquestions[itter2++];
+          questions.push(quesy);
+        }
+        console.log(questions);
+      }
+    }
+  };
+  rawFile.send(null);
 }
-rawFile.send(null);
-}
-
-
 
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function () {
@@ -94,7 +76,6 @@ for (var i = 0; i < btns.length; i++) {
     if (current.length > 0) current[0].classList.toggle("active");
     this.classList.toggle("active");
   });
-
 }
 
 const showanswes = () => {
@@ -105,23 +86,21 @@ const showanswes = () => {
   elD.innerHTML = questions[current].d;
 };
 
-const disselect = ()=>{
-    var x = document.getElementsByClassName("active");
-    x[0].classList.remove('active');
-}
+const disselect = () => {
+  var x = document.getElementsByClassName("active");
+  x[0].classList.remove("active");
+};
 const makequiz = () => {
-   
-//   if (document.getElementsByClassName("active")!= undefined) {
-    var x = document.getElementsByClassName("active");
-//   } else {
-    if(x.length === 0){
-      console.log("fsdfsdf");
-   
+  //   if (document.getElementsByClassName("active")!= undefined) {
+  var x = document.getElementsByClassName("active");
+  //   } else {
+  if (x.length === 0) {
+    console.log("fsdfsdf");
+
     return;
-   }
-   console.log(current);
-   current++;
-  
+  }
+  console.log(current);
+  current++;
 
   console.log(x[0].id);
   answers.push(x[0].id);
@@ -132,12 +111,10 @@ const makequiz = () => {
     submit.innerHTML = "Lets See Marks";
     elA.disabled = true;
     elB.disabled = true;
-    elC.disabled = true;;
+    elC.disabled = true;
     elD.disabled = true;
-    ques.innerText = "Quize is Over!!"
+    ques.innerText = "Quize is Over!!";
 
-
-   
     submit.removeEventListener("click", makequiz);
     submit.addEventListener("click", showmarks);
 
@@ -146,7 +123,7 @@ const makequiz = () => {
   }
   showanswes();
   // if(current === questions.length){
-    disselect();
+  disselect();
   // }
 };
 
@@ -155,7 +132,6 @@ function reload() {
 }
 
 const showmarks = () => {
-
   // Server logic
 
   const Serveranses = questions.map((qs) => {
@@ -170,8 +146,6 @@ const showmarks = () => {
   // console.log("sdxadeeeeeeasdas");
   // console.log(Serveranses);
 
-
-
   // console.log("sdxfsdf");
   q[0].innerHTML = `<h1>Your marks ${mark}/${questions.length} </h1>`;
   submit.innerHTML = "Reattempt";
@@ -179,56 +153,48 @@ const showmarks = () => {
   submit.addEventListener("click", reload, false);
 };
 
-var start = document.getElementById('start');
+var start = document.getElementById("start");
 
-
-start.addEventListener('click',()=>{
-    readTextFile("Input.txt");
-    submit.style.display='block';
-    submit.addEventListener("click", makequiz);
-    questarea.style.display='block';
-    showanswes();
-    timer(true);
-    start.disabled= true;
-    start.innerText= 'Quiz ongoing';
-    start.style.backgroundColor="chartreuse";
-
+start.addEventListener("click", () => {
+  readTextFile("Input.txt");
+  submit.style.display = "block";
+  submit.addEventListener("click", makequiz);
+  questarea.style.display = "block";
+  showanswes();
+  timer(true);
+  start.disabled = true;
+  start.innerText = "Quiz ongoing";
+  start.style.backgroundColor = "chartreuse";
 });
-const timer = (stop) =>{
-
-    if(stop){
-    var countdown =   1*60 * 1000;
-    var timerId = setInterval(function(){
+const timer = (stop) => {
+  if (stop) {
+    var countdown = 1 * 60 * 1000;
+    var timerId = setInterval(function () {
       countdown -= 1000;
       var min = Math.floor(countdown / (60 * 1000));
       //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
-      var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
-    
-      if (countdown <= 0) {
-         //alert("30 min! Quize is over");
-         clearInterval(timerId);
-         document.getElementById('time').innerText= `0 : 0`
-         submit.innerHTML = "Lets See Marks";
-         elA.disabled = true;
-         elB.disabled = true;
-         elC.disabled = true;;
-         elD.disabled = true;
-         
-         ques.innerText = "Quize is Over!!"
-     
-     
-         // Attach an event handler to the document
-         submit.removeEventListener("click", makequiz);
-         submit.addEventListener("click", showmarks);
-     
-      } else {
-        document.getElementById('time').innerText= `${min} : ${sec}`
-      }
-    
-    }, 1000); //1000ms. = 1sec.
-    
-}else{
-    clearInterval(timerId);
-}
+      var sec = Math.floor((countdown - min * 60 * 1000) / 1000); //correct
 
-}
+      if (countdown <= 0) {
+        //alert("30 min! Quize is over");
+        clearInterval(timerId);
+        document.getElementById("time").innerText = `0 : 0`;
+        submit.innerHTML = "Lets See Marks";
+        elA.disabled = true;
+        elB.disabled = true;
+        elC.disabled = true;
+        elD.disabled = true;
+
+        ques.innerText = "Quize is Over!!";
+
+        // Attach an event handler to the document
+        submit.removeEventListener("click", makequiz);
+        submit.addEventListener("click", showmarks);
+      } else {
+        document.getElementById("time").innerText = `${min} : ${sec}`;
+      }
+    }, 1000); //1000ms. = 1sec.
+  } else {
+    clearInterval(timerId);
+  }
+};
