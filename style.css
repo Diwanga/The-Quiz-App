@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+*{
+    box-sizing: border-box;
+  
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  .qa {
+    max-width: 100%;
+    width: 500px;
+    background-color: aqua;
+    border-radius: 3rem 3rem 0 0;
+    overflow: hidden;
+  }
+  .q {
+    padding: 2rem;
+    padding-bottom: 0%;
+    max-width: 100%;
+  }
+  button {
+    display: block;
+    width: 100%;
+  }
+  
+  .ans:hover {
+    background-color: rgb(62, 240, 7);
+    color: white;
+  }
+  .active{
+    background-color: rgb(69, 216, 32);
+    color: rgb(248, 248, 248);
+  }
+  .ans {
+    border: 1px blue solid;
+    text-align: left;
+  }
+
+  .ans:active {
+    outline: none;
+  }
+
+  #submit {
+    margin-top: 1rem;
+    height: 2rem;
+  }
+  #refresh {
+    margin-top: 1rem;
+    height: 2rem;
+  }
+  #start {
+    background-color: rgb(255, 0, 0);
+
+    height: 80px;
+
+    font-size: 2rem;
+  }
+  #time {
+    text-align: center;
+  }
+  .ans{
+      height: 50px;
+      font-size: 25px;
+      text-align: center;
+  }
+  h2{
+      margin-bottom: 2rem;
+  }
+  #submit{
+    height: 50px;
+    font-size: 25px;
+    text-align: center;
+    background-color: rgb(167, 167, 167);
+
+    
+  }
+  #submit:hover{
+    background-color: rgb(248, 240, 240);
+  }
+  #submit:active{
+    background-color: rgb(95, 184, 59);
+    outline: none;
+  }
