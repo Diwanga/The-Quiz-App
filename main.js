@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 var btns = document.getElementsByClassName("ans");
 const elA = document.getElementById("a");
 const elB = document.getElementById("b");
@@ -12,7 +20,7 @@ submit.style.display='none';
 const q = document.getElementsByClassName("q");
 let answers = [];
 let current = 0;
-
+let questions=[];
 let mark = 0;
 
 // const questions = [
@@ -41,6 +49,42 @@ let mark = 0;
 //     ans: "b",
 //   },
 // ];
+
+function readTextFile(file)
+{
+var rawFile = new XMLHttpRequest();
+rawFile.open("GET", file, false);
+rawFile.onreadystatechange = function ()
+{
+   if(rawFile.readyState === 4)
+   {
+       if(rawFile.status === 200 || rawFile.status == 0)
+       {
+           var allText = rawFile.responseText;
+          const Readedquestions = allText.toString().split("/");
+           const itter = Readedquestions.length;
+           var itter2 = 0;
+           for(let i = 0;i<itter/6;i++){
+             let quesy={};
+    
+             quesy.question = Readedquestions[itter2++];
+             quesy.a= Readedquestions[itter2++];
+             quesy.b= Readedquestions[itter2++];
+             quesy.c= Readedquestions[itter2++];
+             quesy.d= Readedquestions[itter2++];
+             quesy.ans= Readedquestions[itter2++];
+             questions.push(quesy);
+
+
+          
+           }
+           console.log(questions);
+
+       }
+   }
+}
+rawFile.send(null);
+}
 
 
 
@@ -123,12 +167,12 @@ const showmarks = () => {
     }
   }
 
-  console.log("sdxadeeeeeeasdas");
-  console.log(Serveranses);
+  // console.log("sdxadeeeeeeasdas");
+  // console.log(Serveranses);
 
 
 
-  console.log("sdxfsdf");
+  // console.log("sdxfsdf");
   q[0].innerHTML = `<h1>Your marks ${mark}/${questions.length} </h1>`;
   submit.innerHTML = "Reattempt";
   submit.removeEventListener("click", showmarks);
@@ -139,7 +183,7 @@ var start = document.getElementById('start');
 
 
 start.addEventListener('click',()=>{
-
+    readTextFile("Input.txt");
     submit.style.display='block';
     submit.addEventListener("click", makequiz);
     questarea.style.display='block';
