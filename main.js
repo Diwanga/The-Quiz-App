@@ -8,7 +8,7 @@ const questarea = document.getElementById("questarea");
 const submit = document.getElementById("submit");
 questarea.style.display = "none";
 submit.style.display = "none";
-
+let timerId ;
 const q = document.getElementsByClassName("q");
 let answers = [];
 let current = 0;
@@ -114,7 +114,9 @@ const makequiz = () => {
     elC.disabled = true;
     elD.disabled = true;
     ques.innerText = "Quize is Over!!";
-
+    start.innerText = "FINISHED";
+    start.style.backgroundColor= 'red';
+    clearInterval(timerId);
     submit.removeEventListener("click", makequiz);
     submit.addEventListener("click", showmarks);
 
@@ -166,10 +168,10 @@ start.addEventListener("click", () => {
   start.innerText = "Quiz ongoing";
   start.style.backgroundColor = "chartreuse";
 });
-const timer = (stop) => {
+ const timer = (stop) => {
   if (stop) {
     var countdown = 1 * 60 * 1000;
-    var timerId = setInterval(function () {
+     timerId = setInterval(function () {
       countdown -= 1000;
       var min = Math.floor(countdown / (60 * 1000));
       //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
@@ -184,7 +186,8 @@ const timer = (stop) => {
         elB.disabled = true;
         elC.disabled = true;
         elD.disabled = true;
-
+        start.innerText = "FINISHED";
+        start.style.backgroundColor= 'red';
         ques.innerText = "Quize is Over!!";
 
         // Attach an event handler to the document
